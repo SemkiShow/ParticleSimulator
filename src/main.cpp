@@ -1,3 +1,4 @@
+#include <SFML/Graphics.hpp>
 #include "imgui-SFML.h"
 #include "UI.hpp"
 #include "Settings.hpp"

@@ -1,5 +1,4 @@
 #include "Settings.hpp"
-#include "Render.hpp"
 #include "UI.hpp"
 
 Settings settings;

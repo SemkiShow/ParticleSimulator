@@ -1,9 +1,9 @@
 #include "UI.hpp"
 #include "Settings.hpp"
-#include "Game.hpp"
 
 bool isSettings = false;
 int menuOffset = 20;
+int windowSize[2] = {16*50*2, 9*50*2};
 
 void ShowSettings(bool* isOpen)
 {
