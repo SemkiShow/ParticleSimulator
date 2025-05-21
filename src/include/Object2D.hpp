@@ -18,4 +18,4 @@ class Circle: public Object2D
         void Draw(sf::RenderWindow* window);
 };
 
-bool Collide(Circle a, Circle b);
+void Collide(Circle* a, Circle* b);

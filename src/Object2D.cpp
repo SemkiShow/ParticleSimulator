@@ -18,8 +18,15 @@ void Circle::Draw(sf::RenderWindow* window)
     window->draw(circle);
 }
 
-bool Collide(Circle a, Circle b)
+void Collide(Circle* a, Circle* b)
 {
     // Calculate collision based on the Pythagorean theorem
-    return sqrt(pow(abs(a.position[0] - b.position[0]), 2) + pow(abs(a.position[1] - b.position[1]), 2)) < a.scale[0] + b.scale[0];
+    bool isColliding = sqrt(pow(abs(a->position[0] - b->position[0]), 2) + pow(abs(a->position[1] - b->position[1]), 2)) < a->scale[0] + b->scale[0];
+    if (isColliding)
+    {
+        a->position[0] += (a->position[0] - b->position[0] - a->scale[0] - b->scale[0]) / 2;
+        a->position[1] += (a->position[1] - b->position[1] - a->scale[0] - b->scale[0]) / 2;
+        b->position[0] += (b->position[0] - a->position[0] - a->scale[0] - b->scale[0]) / 2;
+        b->position[1] += (b->position[1] - a->position[1] - a->scale[0] - b->scale[0]) / 2;
+    }
 }

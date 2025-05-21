@@ -62,13 +62,22 @@ int main()
         ShowMenuBar();
         if (isSettings) ShowSettings(&isSettings);
 
-        window.clear();
+        // Collision detection
+        for (int i = 0; i < circles.size(); i++)
+        {
+            for (int j = 0; j < i; j++)
+            {
+                Collide(&circles[i], &circles[j]);
+            }
+        }
 
+        window.clear();
+        
         for (int i = 0; i < circles.size(); i++)
         {
             circles[i].Draw(&window);
         }
-
+        
         if (delayClock.getElapsedTime().asSeconds() >= 0.3)
         {
             delayClock.restart();
