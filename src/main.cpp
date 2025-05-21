@@ -1,7 +1,14 @@
+#include <iostream>
+#include <vector>
+#include <random>
+#include <ctime>
 #include <SFML/Graphics.hpp>
 #include "imgui-SFML.h"
 #include "UI.hpp"
 #include "Settings.hpp"
+#include "Object2D.hpp"
+
+std::vector<Circle> circles;
 
 int main()
 {
@@ -25,6 +32,14 @@ int main()
     FPS.setString(std::to_string(123));
     FPS.setFillColor(sf::Color(0, 255, 255));
     FPS.setCharacterSize(24);
+    srand(time(0));
+
+    // Add objects
+    for (int i = 0; i < 1000; i++)
+    {
+        circles.push_back(Circle{});
+        circles[i].Init(rand() % windowSize[0], rand() % windowSize[1], 0, 0, rand() % 10, 0);
+    }
 
     sf::Clock deltaTimeClock;
     sf::Time deltaTime;
@@ -48,6 +63,11 @@ int main()
         if (isSettings) ShowSettings(&isSettings);
 
         window.clear();
+
+        for (int i = 0; i < circles.size(); i++)
+        {
+            circles[i].Draw(&window);
+        }
 
         if (delayClock.getElapsedTime().asSeconds() >= 0.3)
         {
