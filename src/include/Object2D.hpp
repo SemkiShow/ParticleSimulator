@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include <iostream>
+#include "UI.hpp"
 
 class Object2D
 {
@@ -16,6 +17,7 @@ class Circle: public Object2D
 {
     public:
         void Draw(sf::RenderWindow* window);
+        void CheckWallColision();
 };
 
 void Collide(Circle* a, Circle* b);

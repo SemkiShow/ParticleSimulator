@@ -18,6 +18,14 @@ void Circle::Draw(sf::RenderWindow* window)
     window->draw(circle);
 }
 
+void Circle::CheckWallColision()
+{
+    if (position[0] - menuOffset - scale[0] / 2 < 0) position[0] += scale[0];
+    if (position[1] - menuOffset - scale[0] / 2 < 0) position[1] += scale[0];
+    if (position[0] + menuOffset + scale[0] / 2 > windowSize[0]) position[0] -= scale[0];
+    if (position[1] + menuOffset + scale[0] / 2 > windowSize[1]) position[1] -= scale[0];
+}
+
 void Collide(Circle* a, Circle* b)
 {
     // Calculate collision based on the Pythagorean theorem

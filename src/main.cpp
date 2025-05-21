@@ -65,6 +65,7 @@ int main()
         // Collision detection
         for (int i = 0; i < circles.size(); i++)
         {
+            circles[i].CheckWallColision();
             for (int j = 0; j < i; j++)
             {
                 Collide(&circles[i], &circles[j]);
