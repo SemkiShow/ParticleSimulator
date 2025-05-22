@@ -4,6 +4,8 @@
 bool gravity = true;
 float gravityForce = 10;
 float friction = 0.95;
+int circlesCount = 1000;
+std::vector<Circle> circles;
 
 void Object2D::Init(double posX, double posY, double rotX, double rotY, double sclX, double sclY)
 {
@@ -34,10 +36,15 @@ void Circle::Draw(sf::RenderWindow* window)
 
 void Circle::CheckWallCollision()
 {
-    if (position[0] - scale[0] / 2 < 0) direction[0] += scale[0];
-    if (position[1] - menuOffset - scale[0] / 2 < 0) direction[1] += scale[0];
-    if (position[0] + scale[0] / 2 > windowSize[0]) direction[0] -= scale[0];
-    if (position[1] + menuOffset + scale[0] / 2 > windowSize[1]) direction[1] -= scale[0] * gravityForce;
+    if (position[0] < 0) direction[0] += gravityForce;
+    if (position[1] - menuOffset < 0) direction[1] += gravityForce;
+    if (position[0] + scale[0] * 2 > windowSize[0]) direction[0] -= gravityForce;
+    if (position[1] + scale[0] * 2 > windowSize[1]) direction[1] -= gravityForce;
+
+    // if (position[0] - scale[0] * 2 < 0) position[0] = scale[0] * 2;
+    // if (position[1] - menuOffset - scale[0] * 2 < 0) position[1] = scale[0] * 2 + menuOffset;
+    // if (position[0] + scale[0] * 2 > windowSize[0]) position[0] = windowSize[0] - scale[0] * 2;
+    // if (position[1] + scale[0] * 2 > windowSize[1]) position[1] = windowSize[1] - scale[0] * 2;
 }
 
 void Collide(Circle* a, Circle* b)
@@ -50,5 +57,16 @@ void Collide(Circle* a, Circle* b)
         a->direction[1] += (a->position[1] - b->position[1] - a->scale[0] - b->scale[0]) / 2;
         b->direction[0] -= (a->position[0] - b->position[0] - a->scale[0] - b->scale[0]) / 2;
         b->direction[1] -= (a->position[1] - b->position[1] - a->scale[0] - b->scale[0]) / 2;
+    }
+}
+
+void AddRandomCircles(sf::Color color)
+{
+    circles.clear();
+    for (int i = 0; i < circlesCount; i++)
+    {
+        circles.push_back(Circle());
+        circles[i].Init(rand() % windowSize[0], rand() % windowSize[1], 0, 0, rand() % 10, 0);
+        circles[i].color = color;
     }
 }

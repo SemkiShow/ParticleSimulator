@@ -8,8 +8,6 @@
 #include "Settings.hpp"
 #include "Object2D.hpp"
 
-std::vector<Circle> circles;
-
 int main()
 {
     settings.Load("settings.txt");
@@ -35,16 +33,13 @@ int main()
     srand(time(0));
 
     // Add objects
-    for (int i = 0; i < 1000; i++)
-    {
-        circles.push_back(Circle{});
-        circles[i].Init(rand() % windowSize[0], rand() % windowSize[1], 0, 0, rand() % 10, 0);
-    }
+    AddRandomCircles();
 
     sf::Clock deltaTimeClock;
     sf::Time deltaTime;
     sf::Clock delayClock;
     bool lastVSync = settings.verticalSync;
+    int lastCirclesCount = circlesCount;
 
     // Main loop
     while (window.isOpen())
@@ -92,6 +87,11 @@ int main()
                     window.setVerticalSyncEnabled(true);
                 else
                     window.setVerticalSyncEnabled(false);
+            }
+            if (lastCirclesCount != circlesCount)
+            {
+                lastCirclesCount = circlesCount;
+                AddRandomCircles();
             }
         }
         if (settings.showFPS) window.draw(FPS);

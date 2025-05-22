@@ -18,6 +18,7 @@ void ShowSettings(bool* isOpen)
     ImGui::Checkbox("gravity", &gravity);
     ImGui::SliderFloat("gravity-force", &gravityForce, 0, 100);
     ImGui::SliderFloat("friction", &friction, 0, 1);
+    ImGui::SliderInt("circles-count", &circlesCount, 0, 1000000);
     ImGui::End();
 }
 
@@ -27,6 +28,7 @@ void ShowMenuBar()
     {
         if (ImGui::BeginMenu("Menu"))
         {
+            if (ImGui::MenuItem("Restart")) AddRandomCircles();
             if (ImGui::MenuItem("Settings"))
             {
                 isSettings = true;
