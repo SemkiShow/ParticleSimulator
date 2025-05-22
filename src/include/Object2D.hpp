@@ -1,10 +1,12 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include <iostream>
+#include <thread>
 
 extern bool gravity;
 extern float gravityForce;
 extern float friction;
+extern int threadsNumber;
 
 class Object2D
 {
@@ -29,3 +31,4 @@ extern std::vector<Circle> circles;
 
 void Collide(Circle* a, Circle* b);
 void AddRandomCircles(sf::Color color = sf::Color(255, 255, 255));
+void DoPhysics(int threadID, sf::Time deltaTime);

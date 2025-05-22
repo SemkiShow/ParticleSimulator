@@ -58,15 +58,11 @@ int main()
         if (isSettings) ShowSettings(&isSettings);
 
         // Physics iteration
-        for (int i = 0; i < circles.size(); i++)
-        {
-            circles[i].Move(deltaTime);
-            circles[i].CheckWallCollision();
-            for (int j = 0; j < i; j++)
-            {
-                Collide(&circles[i], &circles[j]);
-            }
-        }
+        std::vector<std::thread> threads;
+        for (int i = 0; i < threadsNumber; i++)
+            threads.emplace_back([&]{DoPhysics(i, deltaTime);});
+        for (int i = 0; i < threadsNumber; i++)
+            threads[i].join();
 
         window.clear();
         
@@ -78,7 +74,7 @@ int main()
         if (delayClock.getElapsedTime().asSeconds() >= 0.3)
         {
             delayClock.restart();
-            FPS.setString("FPS: " + std::to_string((int)(1 / deltaTime.asSeconds())));
+            FPS.setString("FPS: " + std::to_string(1 / deltaTime.asSeconds()));
             
             if (lastVSync != settings.verticalSync)
             {

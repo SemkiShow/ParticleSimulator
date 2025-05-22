@@ -6,6 +6,8 @@ float gravityForce = 10;
 float friction = 0.95;
 int circlesCount = 1000;
 std::vector<Circle> circles;
+int threadsNumber = std::max(std::thread::hardware_concurrency(), (unsigned int)1);
+// int threadsNumber = 1;
 
 void Object2D::Init(double posX, double posY, double rotX, double rotY, double sclX, double sclY)
 {
@@ -68,5 +70,18 @@ void AddRandomCircles(sf::Color color)
         circles.push_back(Circle());
         circles[i].Init(rand() % windowSize[0], rand() % windowSize[1], 0, 0, rand() % 10, 0);
         circles[i].color = color;
+    }
+}
+
+void DoPhysics(int threadID, sf::Time deltaTime)
+{
+    for (int i = threadID * circles.size() / threadsNumber; i < circles.size(); i++)
+    {
+        circles[i].Move(deltaTime);
+        circles[i].CheckWallCollision();
+        for (int j = 0; j < i; j++)
+        {
+            Collide(&circles[i], &circles[j]);
+        }
     }
 }
