@@ -1,5 +1,6 @@
 #include "Settings.hpp"
 #include "UI.hpp"
+#include "Object2D.hpp"
 
 Settings settings;
 
@@ -28,6 +29,9 @@ void Settings::Save(std::string fileName)
     settingsFile.open(fileName, std::ios::out);
     settingsFile << "vsync=" << (verticalSync ? "true" : "false") << '\n';
     settingsFile << "show-fps=" << (showFPS ? "true" : "false") << '\n';
+    settingsFile << "gravity=" << (gravity ? "true" : "false") << '\n';
+    settingsFile << "gravity-force=" << gravityForce << '\n';
+    settingsFile << "friction=" << friction << '\n';
     settingsFile.close();
 }
 
@@ -45,4 +49,7 @@ void Settings::Load(std::string fileName)
     // Process the file
     verticalSync = settingsList[0].substr(6) == "true";
     showFPS = settingsList[1].substr(9) == "true";
+    gravity = settingsList[2].substr(8) == "true";
+    gravityForce = stof(settingsList[3].substr(14));
+    friction = stof(settingsList[4].substr(9));
 }

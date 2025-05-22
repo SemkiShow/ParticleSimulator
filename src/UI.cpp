@@ -1,5 +1,6 @@
 #include "UI.hpp"
 #include "Settings.hpp"
+#include "Object2D.hpp"
 
 bool isSettings = false;
 int menuOffset = 20;
@@ -14,6 +15,9 @@ void ShowSettings(bool* isOpen)
     }
     ImGui::Checkbox("vsync", &settings.verticalSync);
     ImGui::Checkbox("show-fps", &settings.showFPS);
+    ImGui::Checkbox("gravity", &gravity);
+    ImGui::SliderFloat("gravity-force", &gravityForce, 0, 100);
+    ImGui::SliderFloat("friction", &friction, 0, 1);
     ImGui::End();
 }
 

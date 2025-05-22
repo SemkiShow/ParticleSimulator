@@ -62,10 +62,11 @@ int main()
         ShowMenuBar();
         if (isSettings) ShowSettings(&isSettings);
 
-        // Collision detection
+        // Physics iteration
         for (int i = 0; i < circles.size(); i++)
         {
-            circles[i].CheckWallColision();
+            circles[i].Move(deltaTime);
+            circles[i].CheckWallCollision();
             for (int j = 0; j < i; j++)
             {
                 Collide(&circles[i], &circles[j]);
