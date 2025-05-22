@@ -1,7 +1,5 @@
-main.exe
 build*/
 debug/
 .vscode
-*.zip
 imgui.ini
 settings.txt
