@@ -75,7 +75,7 @@ void AddRandomCircles(sf::Color color)
 
 void DoPhysics(int threadID, sf::Time deltaTime)
 {
-    for (int i = threadID * circles.size() / threadsNumber; i < circles.size(); i++)
+    for (int i = threadID * circles.size() / threadsNumber; i < (threadID + 1) * circles.size() / threadsNumber; i++)
     {
         circles[i].Move(deltaTime);
         circles[i].CheckWallCollision();

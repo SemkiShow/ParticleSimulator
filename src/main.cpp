@@ -60,7 +60,7 @@ int main()
         // Physics iteration
         std::vector<std::thread> threads;
         for (int i = 0; i < threadsNumber; i++)
-            threads.emplace_back([&]{DoPhysics(i, deltaTime);});
+            threads.push_back(std::thread(DoPhysics, i, deltaTime));
         for (int i = 0; i < threadsNumber; i++)
             threads[i].join();
 
