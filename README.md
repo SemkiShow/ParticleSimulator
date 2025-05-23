@@ -2,7 +2,7 @@
 
 A simple particle simulator made in C++/SFML
 
-## How to try
+## How to run
 
 - Download the latest release
 - Unzip it
