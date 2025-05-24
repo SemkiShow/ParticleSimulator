@@ -60,7 +60,7 @@ int main()
         // Physics iteration
         std::vector<std::thread> threads;
         for (int i = 0; i < threadsNumber; i++)
-            threads.push_back(std::thread(DoPhysics, i, deltaTime));
+            threads.push_back(std::thread(DoPhysics, i));
         for (int i = 0; i < threadsNumber; i++)
             threads[i].join();
 
@@ -75,7 +75,7 @@ int main()
         {
             delayClock.restart();
             std::string deltaFPS = "(" + std::to_string((int)ceil(1 / deltaTime.asSeconds()) - simulationSpeed) + ")";
-            FPS.setString("FPS: " + std::to_string(1 / deltaTime.asSeconds()) + " " + (simulationSpeed == 0 ? "" : deltaFPS));
+            FPS.setString("FPS: " + std::to_string((int)(1 / deltaTime.asSeconds())) + " " + (simulationSpeed == 0 ? "" : deltaFPS));
             if (ceil(1 / deltaTime.asSeconds()) < simulationSpeed) FPS.setFillColor(sf::Color(255, 0, 0));
             else FPS.setFillColor(sf::Color(10, 255, 10));
             

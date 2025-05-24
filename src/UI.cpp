@@ -2,7 +2,7 @@
 #include "Settings.hpp"
 #include "Object2D.hpp"
 
-bool isSettings = false;
+bool isSettings = true;
 int menuOffset = 20;
 int windowSize[2] = {16*50*2, 9*50*2};
 

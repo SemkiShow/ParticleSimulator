@@ -18,7 +18,7 @@ class Object2D
     double scale[2] = {0, 0};
     double direction[2] = {0, 0};
     sf::Color color = sf::Color(255, 255, 255);
-    void Move(sf::Time deltaTime);
+    void Move();
 };
 
 class Circle: public Object2D
@@ -32,4 +32,4 @@ extern std::vector<Circle> circles;
 
 void Collide(Circle* a, Circle* b);
 void AddRandomCircles(sf::Color color = sf::Color(255, 255, 255));
-void DoPhysics(int threadID, sf::Time deltaTime);
+void DoPhysics(int threadID);

@@ -19,11 +19,11 @@ void Object2D::Init(double posX, double posY, double rotX, double rotY, double s
     scale[1] = sclY;
 }
 
-void Object2D::Move(sf::Time deltaTime)
+void Object2D::Move()
 {
-    position[0] += direction[0] * deltaTime.asSeconds();
-    position[1] += direction[1] * deltaTime.asSeconds();
-    if (gravity) position[1] += gravityForce * deltaTime.asSeconds();
+    position[0] += direction[0];
+    position[1] += direction[1];
+    if (gravity) position[1] += gravityForce;
     direction[0] *= friction;
     direction[1] *= friction;
 }
@@ -68,11 +68,11 @@ void AddRandomCircles(sf::Color color)
     }
 }
 
-void DoPhysics(int threadID, sf::Time deltaTime)
+void DoPhysics(int threadID)
 {
     for (int i = threadID * circles.size() / threadsNumber; i < (threadID + 1) * circles.size() / threadsNumber; i++)
     {
-        circles[i].Move(deltaTime);
+        circles[i].Move();
         circles[i].CheckWallCollision();
         for (int j = 0; j < i; j++)
         {
