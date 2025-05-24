@@ -38,4 +38,5 @@ if [ "$1" == "--help" ]; then
     echo "With no OPTION, compile and run the release build"
     echo ""
     echo "-d, --debug    Compile the debug build and run it with gdb"
+    echo "--help         Display this help and exit"
 fi
