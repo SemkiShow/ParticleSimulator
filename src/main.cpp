@@ -32,6 +32,7 @@ int main()
     srand(time(0));
 
     // Add objects
+    CleanObjects();
     AddRandomCircles();
 
     sf::Clock deltaTimeClock;
@@ -66,10 +67,8 @@ int main()
 
         window.clear();
         
-        for (int i = 0; i < circles.size(); i++)
-        {
-            circles[i].Draw(&window);
-        }
+        for (int i = 0; i < objects.size(); i++)
+            objects[i]->Draw(&window);
         
         if (delayClock.getElapsedTime().asSeconds() >= 0.3)
         {
@@ -90,6 +89,7 @@ int main()
             if (lastCirclesCount != circlesCount)
             {
                 lastCirclesCount = circlesCount;
+                CleanObjects();
                 AddRandomCircles();
             }
             if (lastSimulationSpeed != simulationSpeed)

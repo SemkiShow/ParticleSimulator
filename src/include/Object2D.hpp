@@ -12,6 +12,7 @@ extern int simulationSpeed;
 class Object2D
 {
     public:
+    virtual ~Object2D();
     void Init(double posX, double posY, double rotX, double rotY, double sclX, double sclY);
     double position[2] = {0, 0};
     double rotation[2] = {0, 0};
@@ -19,17 +20,20 @@ class Object2D
     double direction[2] = {0, 0};
     sf::Color color = sf::Color(255, 255, 255);
     void Move();
+    virtual void Draw(sf::RenderWindow* window);
+    virtual void CheckWallCollision();
 };
+extern std::vector<Object2D*> objects;
 
 class Circle: public Object2D
 {
     public:
-    void Draw(sf::RenderWindow* window);
-    void CheckWallCollision();
+    void Draw(sf::RenderWindow* window) override;
+    void CheckWallCollision() override;
 };
 extern int circlesCount;
-extern std::vector<Circle> circles;
 
-void Collide(Circle* a, Circle* b);
+void Collide(Object2D* object1, Object2D* object2);
+void CleanObjects();
 void AddRandomCircles(sf::Color color = sf::Color(255, 255, 255));
 void DoPhysics(int threadID);

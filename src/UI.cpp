@@ -29,7 +29,11 @@ void ShowMenuBar()
     {
         if (ImGui::BeginMenu("Menu"))
         {
-            if (ImGui::MenuItem("Restart")) AddRandomCircles();
+            if (ImGui::MenuItem("Restart"))
+            {
+                CleanObjects();
+                AddRandomCircles();
+            }
             if (ImGui::MenuItem("Settings"))
             {
                 isSettings = true;
