@@ -38,15 +38,10 @@ void Circle::Draw(sf::RenderWindow* window)
 
 void Circle::CheckWallCollision()
 {
-    if (position[0] < 0) direction[0] += gravityForce;
-    if (position[1] - menuOffset < 0) direction[1] += gravityForce;
-    if (position[0] + scale[0] * 2 > windowSize[0]) direction[0] -= gravityForce;
-    if (position[1] + scale[0] * 2 > windowSize[1]) direction[1] -= gravityForce;
-
-    // if (position[0] - scale[0] * 2 < 0) position[0] = scale[0] * 2;
-    // if (position[1] - menuOffset - scale[0] * 2 < 0) position[1] = scale[0] * 2 + menuOffset;
-    // if (position[0] + scale[0] * 2 > windowSize[0]) position[0] = windowSize[0] - scale[0] * 2;
-    // if (position[1] + scale[0] * 2 > windowSize[1]) position[1] = windowSize[1] - scale[0] * 2;
+    if (position[0] < 0) direction[0] = abs(direction[0]);
+    if (position[1] - menuOffset < 0) direction[1] = abs(direction[1]);
+    if (position[0] + scale[0] * 2 > windowSize[0]) direction[0] = -abs(direction[0]);
+    if (position[1] + scale[0] * 2 > windowSize[1]) direction[1] = -abs(direction[1]) - (gravity ? gravityForce : 0);
 }
 
 void Collide(Circle* a, Circle* b)
@@ -68,7 +63,7 @@ void AddRandomCircles(sf::Color color)
     for (int i = 0; i < circlesCount; i++)
     {
         circles.push_back(Circle());
-        circles[i].Init(rand() % windowSize[0], rand() % windowSize[1], 0, 0, rand() % 10, 0);
+        circles[i].Init(rand() % windowSize[0], rand() % windowSize[1], 0, 0, 2, 0);
         circles[i].color = color;
     }
 }
