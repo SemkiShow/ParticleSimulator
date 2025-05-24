@@ -28,7 +28,6 @@ int main()
     sf::Text FPS(font);
     FPS.setPosition({0, menuOffset * 1.f});
     FPS.setString(std::to_string(123));
-    FPS.setFillColor(sf::Color(0, 255, 255));
     FPS.setCharacterSize(24);
     srand(time(0));
 
@@ -40,6 +39,7 @@ int main()
     sf::Clock delayClock;
     bool lastVSync = settings.verticalSync;
     int lastCirclesCount = circlesCount;
+    int lastSimulationSpeed = simulationSpeed;
 
     // Main loop
     while (window.isOpen())
@@ -74,7 +74,10 @@ int main()
         if (delayClock.getElapsedTime().asSeconds() >= 0.3)
         {
             delayClock.restart();
-            FPS.setString("FPS: " + std::to_string(1 / deltaTime.asSeconds()));
+            std::string deltaFPS = "(" + std::to_string((int)ceil(1 / deltaTime.asSeconds()) - simulationSpeed) + ")";
+            FPS.setString("FPS: " + std::to_string(1 / deltaTime.asSeconds()) + " " + (simulationSpeed == 0 ? "" : deltaFPS));
+            if (ceil(1 / deltaTime.asSeconds()) < simulationSpeed) FPS.setFillColor(sf::Color(255, 0, 0));
+            else FPS.setFillColor(sf::Color(10, 255, 10));
             
             if (lastVSync != settings.verticalSync)
             {
@@ -88,6 +91,11 @@ int main()
             {
                 lastCirclesCount = circlesCount;
                 AddRandomCircles();
+            }
+            if (lastSimulationSpeed != simulationSpeed)
+            {
+                lastSimulationSpeed = simulationSpeed;
+                window.setFramerateLimit(simulationSpeed);
             }
         }
         if (settings.showFPS) window.draw(FPS);

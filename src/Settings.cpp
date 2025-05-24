@@ -33,6 +33,7 @@ void Settings::Save(std::string fileName)
     settingsFile << "gravity-force=" << gravityForce << '\n';
     settingsFile << "friction=" << friction << '\n';
     settingsFile << "circles-count=" << circlesCount << '\n';
+    settingsFile << "simulation-speed=" << simulationSpeed << '\n';
     settingsFile.close();
 }
 
@@ -54,4 +55,5 @@ void Settings::Load(std::string fileName)
     gravityForce = stof(settingsList[3].substr(14));
     friction = stof(settingsList[4].substr(9));
     circlesCount = stoi(settingsList[5].substr(14));
+    simulationSpeed = stoi(settingsList[6].substr(17));
 }

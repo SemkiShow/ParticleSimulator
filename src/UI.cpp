@@ -19,6 +19,7 @@ void ShowSettings(bool* isOpen)
     ImGui::SliderFloat("gravity-force", &gravityForce, 0, 100);
     ImGui::SliderFloat("friction", &friction, 0, 1);
     ImGui::SliderInt("circles-count", &circlesCount, 0, 1000000);
+    ImGui::SliderInt("simulation-speed", &simulationSpeed, 0, 1000);
     ImGui::End();
 }
 

@@ -7,6 +7,7 @@ extern bool gravity;
 extern float gravityForce;
 extern float friction;
 extern int threadsNumber;
+extern int simulationSpeed;
 
 class Object2D
 {

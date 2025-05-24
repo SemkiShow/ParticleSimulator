@@ -7,7 +7,7 @@ float friction = 0.95;
 int circlesCount = 1000;
 std::vector<Circle> circles;
 int threadsNumber = std::max(std::thread::hardware_concurrency(), (unsigned int)1);
-// int threadsNumber = 1;
+int simulationSpeed = 0;
 
 void Object2D::Init(double posX, double posY, double rotX, double rotY, double sclX, double sclY)
 {
