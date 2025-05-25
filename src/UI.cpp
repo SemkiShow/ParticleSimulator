@@ -23,9 +23,12 @@ void ShowSettings(bool* isOpen)
         ImGui::SliderInt("circles-count", &circlesCount, 0, 10000);
 
         ImGui::SliderInt2("circles-position-x-range", &circlesRanges[0], 0, windowSize[0]);
+        if (circlesRanges[1] < circlesRanges[0]) circlesRanges[1] = circlesRanges[0];
         ImGui::SliderInt2("circles-position-y-range", &circlesRanges[2], 0, windowSize[1]);
+        if (circlesRanges[3] < circlesRanges[2]) circlesRanges[3] = circlesRanges[2];
         ImGui::SliderInt2("circles-size-range", &circlesRanges[4], 1, 10);
-        
+        if (circlesRanges[5] < circlesRanges[4]) circlesRanges[5] = circlesRanges[4];
+       
         ImGui::TreePop();
     }
     ImGui::SliderInt("simulation-speed", &simulationSpeed, 0, 1000);
