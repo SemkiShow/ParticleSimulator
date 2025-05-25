@@ -84,17 +84,15 @@ void CleanObjects()
     objects.clear();
 }
 
-int circlesPositionXRange[2] = {0, 0};
-int circlesPositionYRange[2] = {0, 0};
-int circlesSizeRange[2] = {0, 0};
+int circlesRanges[6];
 void AddRandomCircles(sf::Color color)
 {
     for (int i = 0; i < circlesCount; i++)
     {
         objects.push_back(new Circle());
-        objects[i]->Init(rand() % (circlesPositionXRange[1] - circlesPositionXRange[0] + 1) + circlesPositionXRange[0], 
-            rand() % (circlesPositionYRange[1] - circlesPositionYRange[0] + 1) + circlesPositionYRange[0], 0, 0, 
-            rand() % (circlesSizeRange[1] - circlesSizeRange[0] + 1) + circlesSizeRange[0], 0);
+        objects[i]->Init(rand() % (circlesRanges[1] - circlesRanges[0] + 1) + circlesRanges[0], 
+            rand() % (circlesRanges[3] - circlesRanges[2] + 1) + circlesRanges[2], 0, 0, 
+            rand() % (circlesRanges[5] - circlesRanges[4] + 1) + circlesRanges[4], 0);
         objects[i]->color = color;
     }
 }

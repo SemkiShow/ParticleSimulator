@@ -36,9 +36,7 @@ extern int circlesCount;
 void Collide(Object2D* object1, Object2D* object2);
 void CleanObjects();
 
-extern int circlesPositionXRange[2];
-extern int circlesPositionYRange[2];
-extern int circlesSizeRange[2];
+extern int circlesRanges[6];
 void AddRandomCircles(sf::Color color = sf::Color(255, 255, 255));
 
 void DoPhysics(int threadID);

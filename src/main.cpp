@@ -32,7 +32,6 @@ int main()
     srand(time(0));
 
     // Add objects
-    CleanObjects();
     AddRandomCircles();
 
     sf::Clock deltaTimeClock;
@@ -42,12 +41,8 @@ int main()
     int lastCirclesCount = circlesCount;
     int lastSimulationSpeed = simulationSpeed;
     int lastCirclesRanges[6];
-    lastCirclesRanges[0] = circlesPositionXRange[0];
-    lastCirclesRanges[1] = circlesPositionXRange[1];
-    lastCirclesRanges[2] = circlesPositionYRange[0];
-    lastCirclesRanges[3] = circlesPositionYRange[1];
-    lastCirclesRanges[4] = circlesSizeRange[0];
-    lastCirclesRanges[5] = circlesSizeRange[1];
+    for (int i = 0; i < 6; i++)
+        lastCirclesRanges[i] = circlesRanges[i];
 
     // Main loop
     while (window.isOpen())
@@ -94,20 +89,16 @@ int main()
                     window.setVerticalSyncEnabled(false);
             }
             if (lastCirclesCount != circlesCount || 
-                lastCirclesRanges[0] != circlesPositionXRange[0] || 
-                lastCirclesRanges[1] != circlesPositionXRange[1] || 
-                lastCirclesRanges[2] != circlesPositionYRange[0] || 
-                lastCirclesRanges[3] != circlesPositionYRange[1] || 
-                lastCirclesRanges[4] != circlesSizeRange[0] || 
-                lastCirclesRanges[5] != circlesSizeRange[1])
+                lastCirclesRanges[0] != circlesRanges[0] || 
+                lastCirclesRanges[1] != circlesRanges[1] || 
+                lastCirclesRanges[2] != circlesRanges[2] || 
+                lastCirclesRanges[3] != circlesRanges[3] || 
+                lastCirclesRanges[4] != circlesRanges[4] || 
+                lastCirclesRanges[5] != circlesRanges[5])
             {
                 lastCirclesCount = circlesCount;
-                lastCirclesRanges[0] = circlesPositionXRange[0];
-                lastCirclesRanges[1] = circlesPositionXRange[1];
-                lastCirclesRanges[2] = circlesPositionYRange[0];
-                lastCirclesRanges[3] = circlesPositionYRange[1];
-                lastCirclesRanges[4] = circlesSizeRange[0];
-                lastCirclesRanges[5] = circlesSizeRange[1];
+                for (int i = 0; i < 6; i++)
+                    lastCirclesRanges[i] = circlesRanges[i];
                 CleanObjects();
                 AddRandomCircles();
             }
