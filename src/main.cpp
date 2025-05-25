@@ -41,6 +41,13 @@ int main()
     bool lastVSync = settings.verticalSync;
     int lastCirclesCount = circlesCount;
     int lastSimulationSpeed = simulationSpeed;
+    int lastCirclesRanges[6];
+    lastCirclesRanges[0] = circlesPositionXRange[0];
+    lastCirclesRanges[1] = circlesPositionXRange[1];
+    lastCirclesRanges[2] = circlesPositionYRange[0];
+    lastCirclesRanges[3] = circlesPositionYRange[1];
+    lastCirclesRanges[4] = circlesSizeRange[0];
+    lastCirclesRanges[5] = circlesSizeRange[1];
 
     // Main loop
     while (window.isOpen())
@@ -86,9 +93,21 @@ int main()
                 else
                     window.setVerticalSyncEnabled(false);
             }
-            if (lastCirclesCount != circlesCount)
+            if (lastCirclesCount != circlesCount || 
+                lastCirclesRanges[0] != circlesPositionXRange[0] || 
+                lastCirclesRanges[1] != circlesPositionXRange[1] || 
+                lastCirclesRanges[2] != circlesPositionYRange[0] || 
+                lastCirclesRanges[3] != circlesPositionYRange[1] || 
+                lastCirclesRanges[4] != circlesSizeRange[0] || 
+                lastCirclesRanges[5] != circlesSizeRange[1])
             {
                 lastCirclesCount = circlesCount;
+                lastCirclesRanges[0] = circlesPositionXRange[0];
+                lastCirclesRanges[1] = circlesPositionXRange[1];
+                lastCirclesRanges[2] = circlesPositionYRange[0];
+                lastCirclesRanges[3] = circlesPositionYRange[1];
+                lastCirclesRanges[4] = circlesSizeRange[0];
+                lastCirclesRanges[5] = circlesSizeRange[1];
                 CleanObjects();
                 AddRandomCircles();
             }

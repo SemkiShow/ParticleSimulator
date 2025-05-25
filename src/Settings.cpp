@@ -33,6 +33,9 @@ void Settings::Save(std::string fileName)
     settingsFile << "gravity-force=" << gravityForce << '\n';
     settingsFile << "friction=" << friction << '\n';
     settingsFile << "circles-count=" << circlesCount << '\n';
+    settingsFile << "circles-ranges=" << circlesPositionXRange[0] << ',' << circlesPositionXRange[1] 
+        << ',' << circlesPositionYRange[0] << ',' << circlesPositionYRange[1] 
+        << ',' << circlesSizeRange[0] << ',' << circlesSizeRange[1] << '\n';
     settingsFile << "simulation-speed=" << simulationSpeed << '\n';
     settingsFile.close();
 }
@@ -55,5 +58,12 @@ void Settings::Load(std::string fileName)
     gravityForce = stof(settingsList[3].substr(14));
     friction = stof(settingsList[4].substr(9));
     circlesCount = stoi(settingsList[5].substr(14));
-    simulationSpeed = stoi(settingsList[6].substr(17));
+    std::vector<std::string> circlesRanges = Split(settingsList[6].substr(15), ',');
+    circlesPositionXRange[0] = circlesRanges[0] == "MAX" ? windowSize[0] : stoi(circlesRanges[0]);
+    circlesPositionXRange[1] = circlesRanges[1] == "MAX" ? windowSize[0] : stoi(circlesRanges[1]);
+    circlesPositionYRange[0] = circlesRanges[2] == "MAX" ? windowSize[1] : stoi(circlesRanges[2]);
+    circlesPositionYRange[1] = circlesRanges[3] == "MAX" ? windowSize[1] : stoi(circlesRanges[3]);
+    circlesSizeRange[0] = stoi(circlesRanges[4]);
+    circlesSizeRange[1] = stoi(circlesRanges[5]);
+    simulationSpeed = stoi(settingsList[7].substr(17));
 }

@@ -18,7 +18,14 @@ void ShowSettings(bool* isOpen)
     ImGui::Checkbox("gravity", &gravity);
     ImGui::SliderFloat("gravity-force", &gravityForce, 0, 100);
     ImGui::SliderFloat("friction", &friction, 0, 1);
-    ImGui::SliderInt("circles-count", &circlesCount, 0, 1000000);
+    if (ImGui::TreeNode("circles"))
+    {
+        ImGui::SliderInt("circles-count", &circlesCount, 0, 10000);
+        ImGui::SliderInt2("circles-position-x-range", circlesPositionXRange, 0, windowSize[0]);
+        ImGui::SliderInt2("circles-position-y-range", circlesPositionYRange, 0, windowSize[1]);
+        ImGui::SliderInt2("circles-size-range", circlesSizeRange, 1, 10);
+        ImGui::TreePop();
+    }
     ImGui::SliderInt("simulation-speed", &simulationSpeed, 0, 1000);
     ImGui::End();
 }
